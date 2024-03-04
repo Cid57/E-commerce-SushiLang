@@ -1,5 +1,12 @@
 <?php
 
+// On vérifie si l'utilisateur est en train de valider son panier
+if (str_contains($_SERVER['HTTP_REFERER'], 'panier.php')) {
+    // Si c'est le cas on le redirige vers la page d'adresses
+    header('Location: /protected/adresse.php');
+    die;
+}
+
 // Vérifie que le formulaire à bien été envoyé
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registering_form_submit'])) {
 
@@ -21,9 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registering_form_submi
         $errors['email'] = 'Le champs Email est obligatoire et doit être une adresse email valide';
     }
 
+    var_dump(preg_match('/[a-zA-Z0-9\!\@\$\€\*\^\§\%\&]{16,32}/', $_POST['password']));
+    exit;
+
     // Validation du champs "Password"
-    if (empty($_POST['password']) || !preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $_POST['password'])) {
-        $errors['password'] = 'Le mot de passe est obligatoire et doit contenir entre 16 et 32 carcatères avec des minuscules, des MAJUSCULES et des caractères spéciaux comme @,$,€,*,^,§,%,&.';
+    if (empty($_POST['password']) || !preg_match('/[a-zA-Z0-9\!\@\$\€\*\^\§\%\&]{16,32}/', $_POST['password'])) {
+        $errors['password'] = 'Le mot de passe est obligatoire et doit contenir entre 10 et 32 carcatères avec des minuscules, des MAJUSCULES et des caractères spéciaux comme @,$,€,*,^,§,%,&.';
     }
 
     if (!isset($_POST['cgu'])) {
@@ -59,5 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registering_form_submi
         }
     }
 }
+
 
 require 'templates/inscription.html.php';
