@@ -35,7 +35,7 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control <?= isset($errors) && !empty($errors['password']) ? 'is-invalid' : '' ?>" name="password" id="password" aria-describedby="passwordHelp" minlength="10" required>
-                    <div id="passwordHelp" class="form-text">Doit contenir au moins une lettre Majuscule et un caractère spécial (!,@,$,€,*,^,§,%,&).</div>
+                    <div id="passwordHelp" class="form-text">Doit contenir au moins une lettre Majuscule et un caractère spécial (#,?,!,@,$,%,^,&,*,-).</div>
                     <?php if (isset($errors) && !empty($errors['password'])) : ?>
                         <div class="invalid-feedback d-block">
                             <?= $errors['password'] ?>
