@@ -5,13 +5,22 @@
             <h1>Inscription</h1>
             <form method="POST">
                 <div class="mb-3">
+
                     <label for="lastname" class="form-label">Nom</label>
+                    <!-- La classe 'is-invalid' est ajoutée dynamiquement si une erreur est présente pour le champ 'lastname' -->
                     <input type="text" class="form-control <?= isset($errors) && !empty($errors['lastname']) ? 'is-invalid' : '' ?>" name="lastname" id="lastname" required placeholder="ex: DOE">
+
+                    <!-- Structure conditionnelle pour vérifier la présence d'erreurs pour le champ 'lastname' -->
                     <?php if (isset($errors) && !empty($errors['lastname'])) : ?>
+
+                        <!-- Div pour afficher le message d'erreur -->
                         <div class="invalid-feedback d-block">
                             <?= $errors['lastname'] ?>
                         </div>
+
                     <?php endif; ?>
+
+
                 </div>
                 <div class="mb-3">
                     <label for="firstname" class="form-label">Prénom</label>
@@ -34,8 +43,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control <?= isset($errors) && !empty($errors['password']) ? 'is-invalid' : '' ?>" name="password" id="password" aria-describedby="passwordHelp" minlength="16" required>
-                    <div id="passwordHelp" class="form-text">Doit contenir au moins une lettre Majuscule et un caractère spécial (!,@,$,€,*,^,§,%,&).</div>
+                    <input type="password" class="form-control <?= isset($errors) && !empty($errors['password']) ? 'is-invalid' : '' ?>" name="password" id="password" aria-describedby="passwordHelp" minlength="10" required>
+                    <div id="passwordHelp" class="form-text">Doit contenir au moins 10 caractères.</div>
                     <?php if (isset($errors) && !empty($errors['password'])) : ?>
                         <div class="invalid-feedback d-block">
                             <?= $errors['password'] ?>
